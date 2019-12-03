@@ -6,6 +6,7 @@ ui <- fluidPage(
   actionButton("increment", "Increment"),
   actionButton("decrement", "Decrement"),
   actionButton("reset", "Reset"),
+  actionButton("blaaaa", "Blaaaa"),
   h5("Value:"),
   textOutput("updated_value")
 )
@@ -23,6 +24,9 @@ server <- function(input, output, session) {
   })
   observeEvent(input$reset, {
     rv$value <- 0
+  })
+  observeEvent(input$blaaaa, {
+    rv$value <- 'tired'
   })
   output$updated_value <- renderText({rv$value})
 }

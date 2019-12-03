@@ -21,6 +21,7 @@ server <- function(input, output, session) {
   
   # Load data ----
   full_data <- reactive({
+    req(input$file)
     read_csv(input$file$datapath)
   })
   

@@ -35,12 +35,14 @@ server <- function(input, output, session) {
     rv$data
   })
   
+  dat <- debounce(data, 1000)
+  
   # Summarize data ----
   output$summary <- renderPrint({
     # Insert artificial slowness
     on.exit(Sys.sleep(1))
     
-    summary(data())
+    summary(dat())
   })
 }
 
