@@ -1,10 +1,12 @@
 # Load packages ----------------------------------------------------------------
 library(shiny)
 library(ggplot2)
+library(shinythemes)
 
 # Define UI --------------------------------------------------------------------
 ui <- fluidPage(
   titlePanel("Linked brushing"),
+  theme = shinytheme("paper"),
   fluidRow(
     column(5,
       plotOutput("plot", brush = "brush")

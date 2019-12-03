@@ -24,6 +24,9 @@ ui <- fluidPage(
                   selected = "Drama",
                   multiple = TRUE),
       
+      #Set action buttion ----
+      div(actionButton("button", "Print", width=75), align='center'),
+      
       # Select variable for y-axis ----
       selectInput(inputId = "y", 
                   label = "Y-axis:",
@@ -69,7 +72,8 @@ ui <- fluidPage(
       # Show data table ----
       checkboxInput(inputId = "show_data",
                     label = "Show data table",
-                    value = TRUE)
+                    value = TRUE),
+      
     ),
     
     # Output ----
@@ -112,9 +116,9 @@ server <- function(input, output) {
   )
   
   # Save movies_subset when it changes
-  observe({
+  observeEvent(input$button, {
     filename <- paste0("movies-subset", format(Sys.time(), "%Y-%m-%d-%H-%M-%S"), ".csv")
-    write_csv(movies_subset(), path = paste0("saved-data/", filename))
+    write_csv(movies_subset(), path = paste0("saved-data/", filename)) #whenever movie subset changes, it observes and writes a csv file
   })
 }
 

@@ -11,10 +11,20 @@ ui <- fluidPage(
 )
 
 # Define server ----------------------------------------------------------------
+
 server <- function(input, output, session) {
-  output$updated_value <- renderText({
-    0
+  rv <- reactiveValues(value = 0)
+  
+  observeEvent(input$increment, {
+    rv$value <- rv$value + 1
   })
+  observeEvent(input$decrement, {
+    rv$value <- rv$value - 1
+  })
+  observeEvent(input$reset, {
+    rv$value <- 0
+  })
+  output$updated_value <- renderText({rv$value})
 }
 
 # Create the app ---------------------------------------------------------------

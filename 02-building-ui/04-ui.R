@@ -24,7 +24,7 @@ server <- function(input, output, session) {
     mtcars %>% 
       rownames_to_column(var = "make_model") %>%
       filter(am == input$am)
-  })
+  }, options = list(lengthChange=F, searching=F, ordering=F, paging=F), rownames=F)
 }
 
 # Create the app ---------------------------------------------------------------

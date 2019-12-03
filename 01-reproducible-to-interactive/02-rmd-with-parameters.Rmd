@@ -2,12 +2,13 @@
 title:  "`r params$drug`"
 output: html_document
 params:
-  drug: "Prednisone"
+  drug: "Prednisone" 
 ---
 
 ```{r setup, include=FALSE}
 source("00-helpers.R")
 
+#Can add in "Ibuprofen" to produce a graph for another drug
 # Get and clean adverse event data from the openfda API
 drug <- params$drug
 age <- create_age(20,65)

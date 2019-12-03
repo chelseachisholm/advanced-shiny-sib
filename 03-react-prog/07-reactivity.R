@@ -8,7 +8,10 @@ library(lubridate)
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
-      textInput("packages", "Package names (comma separated)")
+      textInput("packages", "Package names (comma separated)"),
+    
+    #Set action buttion ----
+    div(actionButton("button", "Update", width=75), align='center')
     ),
     mainPanel(
       plotOutput("plot")
@@ -20,7 +23,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   # Parses comma-separated string into a proper vector ----
-  packages <- reactive({
+  packages <- eventReactive(input$button, {
     strsplit(input$packages, " *, *")[[1]]
   })
   
@@ -28,7 +31,7 @@ server <- function(input, output, session) {
   daily_downloads <- reactive({
     cranlogs::cran_downloads(
       packages = packages(),
-      from = "2018-01-01", to = "2019-11-15"
+      from = "2010-01-01", to = "2019-11-15"
     )
   })
   

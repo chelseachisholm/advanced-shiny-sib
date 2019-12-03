@@ -57,7 +57,8 @@ ui <- fluidPage(
       sliderInput(inputId = "size", 
                   label = "Size:", 
                   min = 0, max = 5, 
-                  value = 2),
+                  value = 2,
+                  step=0.25),
       
       # Show data table ----
       checkboxInput(inputId = "show_data",
@@ -94,7 +95,7 @@ server <- function(input, output) {
   # Print data table if checked ----
   output$moviestable <- DT::renderDataTable(
     if(input$show_data){
-      DT::datatable(data = movies %>% select(1:5))
+      DT::datatable(data = movies %>% select(c(1:5, critics_rating)))
     }
   )
 }
